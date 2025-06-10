@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 ---
 
-<Layout title="Dashboard - AuctionHub">
+<Layout title="Dashboard - Deal Online">
   <Header />
   
   <div class="min-h-screen bg-gray-50">
@@ -159,8 +159,8 @@ import Header from '../components/Header.astro';
 
     if (!token || !user) {
       // Show auth check loading
-      authCheck.classList.remove('hidden');
-      dashboardContent.classList.add('hidden');
+      if (authCheck) authCheck.classList.remove('hidden');
+      if (dashboardContent) dashboardContent.classList.add('hidden');
       
       // Redirect to login after a short delay
       setTimeout(() => {
@@ -170,9 +170,11 @@ import Header from '../components/Header.astro';
     }
 
     // User is authenticated
-    authCheck.classList.add('hidden');
-    dashboardContent.classList.remove('hidden');
-    userName.textContent = user.nombre;
+    if (authCheck) authCheck.classList.add('hidden');
+    if (dashboardContent) dashboardContent.classList.remove('hidden');
+    if (userName) {
+      userName.textContent = user.nombre;
+    }
     
     return true;
   }
@@ -190,7 +192,7 @@ import Header from '../components/Header.astro';
 
       // Update stats
       const productsCount = userProducts.length;
-      const activeAuctionsCount = userProducts.filter(p => p.Auction?.status === 'active').length;
+      const activeAuctionsCount = userProducts.filter((p: any) => p.Auction?.status === 'active').length;
       const bidsCount = userBids.length;
       const wonAuctionsCount = userBids.filter(bid => bid.auction?.status === 'closed' && bid.auction?.winner_id === $user.get().id).length;
 

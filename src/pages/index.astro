@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import ProductCard from '../components/ProductCard.astro';
 import { api, ApiError } from '../services/api.js';
 
@@ -30,7 +31,7 @@ try {
 }
 ---
 
-<Layout title="AuctionHub - Plataforma de Subastas Online">
+<Layout title="Deal Online - Plataforma de Subastas Online">
   <Header />
   
   <!-- API Status Notice (only shown when API is unavailable) -->
@@ -81,26 +82,6 @@ try {
     </div>
   </section>
 
-  <!-- Stats Section -->
-  <section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-        <div class="p-6">
-          <div class="text-4xl font-bold text-primary-600 mb-2">1000+</div>
-          <div class="text-gray-600">Productos Subastados</div>
-        </div>
-        <div class="p-6">
-          <div class="text-4xl font-bold text-accent-600 mb-2">500+</div>
-          <div class="text-gray-600">Usuarios Activos</div>
-        </div>
-        <div class="p-6">
-          <div class="text-4xl font-bold text-success-600 mb-2">95%</div>
-          <div class="text-gray-600">Satisfacción</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Featured Products -->
   {apiAvailable && featuredProducts.length > 0 && (
     <section class="py-16 bg-gray-50">
@@ -115,7 +96,7 @@ try {
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
-          {featuredProducts.map((product) => (
+          {featuredProducts.map((product: any) => (
             <ProductCard product={product} />
           ))}
         </div>
@@ -149,7 +130,7 @@ try {
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
-          {activeAuctions.map((auction) => (
+          {activeAuctions.map((auction: any) => (
             <ProductCard product={auction.Product} />
           ))}
         </div>
@@ -345,63 +326,6 @@ try {
     </>
   )}
 
-  <!-- How it Works -->
-  <section class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">¿Cómo Funciona?</h2>
-        <p class="text-gray-600 max-w-2xl mx-auto">
-          Participar en nuestras subastas es fácil y seguro
-        </p>
-      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="text-center p-6">
-          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">1. Regístrate</h3>
-          <p class="text-gray-600">Crea tu cuenta de forma gratuita y verifica tu email</p>
-        </div>
-
-        <div class="text-center p-6">
-          <div class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-accent-600" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">2. Explora</h3>
-          <p class="text-gray-600">Descubre productos únicos en nuestras subastas activas</p>
-        </div>
-
-        <div class="text-center p-6">
-          <div class="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-success-600" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 17v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">3. Oferta y Gana</h3>
-          <p class="text-gray-600">Haz tu oferta y sigue la subasta hasta ganar</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="py-16 bg-gradient-to-r from-primary-600 to-accent-600 text-white">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold mb-4">¿Listo para empezar?</h2>
-      <p class="text-xl mb-8">
-        Únete a miles de usuarios que ya disfrutan de nuestras subastas
-      </p>
-      <a 
-        href="/register" 
-        class="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
-      >
-        Crear Cuenta Gratuita
-      </a>
-    </div>
-  </section>
+  <Footer />
 </Layout>
